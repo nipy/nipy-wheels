@@ -1,6 +1,6 @@
 [submodule "nipy"]
 	path = nipy
-	url = git://github.com/nipy/nipy.git
+	url = https://github.com/nipy/nipy.git
 [submodule "multibuild"]
 	path = multibuild
 	url = https://github.com/matthew-brett/multibuild.git
