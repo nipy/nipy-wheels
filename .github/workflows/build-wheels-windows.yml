@@ -73,7 +73,7 @@ jobs:
         if [ "schedule" == "${{ github.event_name }}" ]; then echo "TRAVIS_EVENT_TYPE=cron" >> $GITHUB_ENV; else echo "TRAVIS_EVENT_TYPE=${{ github.event_name }}" >> $GITHUB_ENV; fi
         if [ "schedule" == "${{ github.event_name }}" ]; then echo "BUILD_COMMIT=main" >> $GITHUB_ENV; else echo "BUILD_COMMIT=$BUILD_COMMIT" >> $GITHUB_ENV; fi
         echo "BUILD_DEPENDS=$(echo $NP_BUILD_DEP Cython nibabel)" >> $GITHUB_ENV
-        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP nose pytest nibabel $SCIPY_DEP)" >> $GITHUB_ENV
+        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP pytest nibabel $SCIPY_DEP)" >> $GITHUB_ENV
     - name: Print some Environment variable
       run: |
         echo "ANACONDA_ORG: ${ANACONDA_ORG}"
@@ -139,6 +139,6 @@ jobs:
 
         if [ "$TRAVIS_EVENT_TYPE" == "cron" ] || [ "$TRAVIS_EVENT_TYPE" == "push" ]; then
           pip install git+https://github.com/Anaconda-Platform/anaconda-client.git@ce89e4351eef0f3d2840c713397e013231de25f8;
-          ls ./${REPO_DIR}/dist/*.whl
-          anaconda -t ${TOKEN} upload --force -u ${ANACONDA_ORG} ./${REPO_DIR}/dist/*.whl;
+          ls ./${REPO_DIR}/*.whl
+          anaconda -t ${TOKEN} upload --force -u ${ANACONDA_ORG} ./${REPO_DIR}/*.whl;
         fi
