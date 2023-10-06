@@ -61,7 +61,7 @@ jobs:
           echo "NP_BUILD_DEP=$(echo numpy==1.23.2)" >> $GITHUB_ENV
           echo "NP_TEST_DEP=$(echo numpy==1.23.2)" >> $GITHUB_ENV
         elif [ "$PYTHON_VERSION" == '3.12' ]; then
-          echo "NP_BUILD_DEP=$(echo numpy==1.26.0" >> $GITHUB_ENV
+          echo "NP_BUILD_DEP=$(echo numpy==1.26.0)" >> $GITHUB_ENV
           echo "NP_TEST_DEP=$(echo numpy==1.26.0)" >> $GITHUB_ENV
         else
           echo "None of the defined python version, use default"
