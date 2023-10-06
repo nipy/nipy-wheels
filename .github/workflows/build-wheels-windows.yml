@@ -49,14 +49,14 @@ jobs:
         CYTHON_DEP: "Cython>=3"
       run: |
         if [ "$PYTHON_VERSION" == '3.8' ]; then
-          echo "NP_BUILD_DEP=$(echo numpy==1.17.3)" >> $GITHUB_ENV
-          echo "NP_TEST_DEP=$(echo numpy==1.17.3)" >> $GITHUB_ENV
+          echo "NP_BUILD_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
+          echo "NP_TEST_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
         elif [ "$PYTHON_VERSION" == '3.9' ]; then
-          echo "NP_BUILD_DEP=$(echo numpy==1.19.4)" >> $GITHUB_ENV
-          echo "NP_TEST_DEP=$(echo numpy==1.19.4)" >> $GITHUB_ENV
+          echo "NP_BUILD_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
+          echo "NP_TEST_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
         elif [ "$PYTHON_VERSION" == '3.10' ]; then
-          echo "NP_BUILD_DEP=$(echo numpy==1.22.0)" >> $GITHUB_ENV
-          echo "NP_TEST_DEP=$(echo numpy==1.22.0)" >> $GITHUB_ENV
+          echo "NP_BUILD_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
+          echo "NP_TEST_DEP=$(echo numpy==1.22.2)" >> $GITHUB_ENV
         elif [ "$PYTHON_VERSION" == '3.11' ]; then
           echo "NP_BUILD_DEP=$(echo numpy==1.23.2)" >> $GITHUB_ENV
           echo "NP_TEST_DEP=$(echo numpy==1.23.2)" >> $GITHUB_ENV
