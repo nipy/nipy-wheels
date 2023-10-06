@@ -23,11 +23,10 @@ function pre_build {
     fi
     # Just in case.
     brew install openblas
-    cp site.cfg.openblas nipy/site.cfg
 }
 
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python --version
-    python ../nipy/tools/nipnost nipy
+    pytest --doctest-plus --pyargs nipy
 }
