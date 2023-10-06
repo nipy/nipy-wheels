@@ -105,7 +105,7 @@ jobs:
         if [ "schedule" == "${{ github.event_name }}" ]; then echo "TRAVIS_EVENT_TYPE=cron" >> $GITHUB_ENV; else echo "TRAVIS_EVENT_TYPE=${{ github.event_name }}" >> $GITHUB_ENV; fi
         if [ "schedule" == "${{ github.event_name }}" ]; then echo "BUILD_COMMIT=master" >> $GITHUB_ENV; else echo "BUILD_COMMIT=$BUILD_COMMIT" >> $GITHUB_ENV; fi
         echo "BUILD_DEPENDS=$(echo $NP_BUILD_DEP Cython nibabel)" >> $GITHUB_ENV;
-        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP nose pytest nibabel $SCIPY_DEP)" >> $GITHUB_ENV;
+        echo "TEST_DEPENDS=$(echo $NP_TEST_DEP nose pytest nibabel $SCIPY_DEP pytest-doctestplus)" >> $GITHUB_ENV;
     - name: Setup Special Environment variables for Linux
       if: startsWith(matrix.os,'ubuntu') && matrix.MB_ML_VER == 2010
       run: |

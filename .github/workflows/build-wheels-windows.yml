@@ -110,7 +110,7 @@ jobs:
       run: |
         # Install the test dependencies
         pip install ${NP_TEST_DEP} ${SCIPY_DEP} ${CYTHON_DEP}
-        pip install --pre --no-index --find-links ./${REPO_DIR}/dist ${PKG_NAME}
+        pip install --pre --no-index --find-links ./${REPO_DIR} ${PKG_NAME}
     - name: Run Tests
       env:
         MPLBACKEND: Agg
