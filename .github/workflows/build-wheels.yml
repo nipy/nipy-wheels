@@ -55,7 +55,7 @@ jobs:
     env:
       REPO_DIR: nipy
       PKG_NAME: nipy
-      BUILD_COMMIT: 1.7.0
+      BUILD_COMMIT: main
       UNICODE_WIDTH: 32
       MB_PYTHON_VERSION: ${{ matrix.python-version }}
       TRAVIS_PYTHON_VERSION: ${{ matrix.python-version }}

@@ -24,7 +24,7 @@ jobs:
         python-version: [3.8, 3.9, '3.10', "3.11", "3.12"]
         platform: [x64]  # Deactivate x32, until fix in nipy
     env:
-      BUILD_COMMIT: 1.7.0
+      BUILD_COMMIT: main
       REPO_DIR: nipy
       PKG_NAME: nipy
       NP_BUILD_DEP: "numpy==1.13.3"
