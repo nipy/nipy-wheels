@@ -12,7 +12,7 @@ on:
 
 env:
   REPO_DIR: nipy
-  TEST_DEPENDS: "pytest pytest-timeout"
+  TEST_DEPENDS: "-r dev-requirements.txt"
 
 jobs:
   build:
