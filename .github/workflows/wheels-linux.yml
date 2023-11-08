@@ -11,7 +11,7 @@ on:
         type: string
 
 env:
-  REPO_DIR: Pillow
+  REPO_DIR: nipy
   TEST_DEPENDS: "pytest pytest-timeout"
 
 jobs:
