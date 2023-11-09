@@ -16,8 +16,14 @@ function pre_build {
     # Runs in the root directory of this repository.
     # Workaround for Accelerate error; only on macOS.
     if [ -z "$IS_MACOS" ]; then return; fi
-    clean_arch_flags
     brew install openblas
+}
+
+
+function pip_wheel_cmd {
+    local abs_wheelhouse=$1
+    clean_arch_flags
+    pip wheel $(pip_opts) -w $abs_wheelhouse --no-deps .
 }
 
 function run_tests {
