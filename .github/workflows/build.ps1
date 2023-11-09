@@ -1,5 +1,5 @@
 echo "::group::Build wheel"
-  pip wheel -w "${env:WHEEL_SDIR}" --no-deps "${env:REPO_DIR}"
+  pip wheel -w "${env:WHEEL_SDIR}" --no-deps ".\${env:REPO_DIR}"
   ls -l "${env:GITHUB_WORKSPACE}/${env:WHEEL_SDIR}/"
 echo "::endgroup::"
 
