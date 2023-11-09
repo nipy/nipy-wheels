@@ -27,8 +27,8 @@ echo "::endgroup::"
 echo "::group::Build wheel"
   np_dep=$(python ./get_numpy_version.py $MB_PYTHON_VERSION)
   export BUILD_DEPENDS="${BUILD_BASE} ${np_dep}"
-  np_dep=$(python get_numpy_version.py ${MB_PYTHON_VERSION})
-  export BUILD_DEPENDS=$np_dep
+  echo "Build depends: ${BUILD_DEPENDS}"
+  echo "Build base: ${BUILD_BASE}"
   clean_code
   build_wheel
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
