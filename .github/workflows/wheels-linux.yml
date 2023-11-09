@@ -56,7 +56,7 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
       - name: Set Numpy version
-        run: echo "BUILD_DEPENDS=$(./get_numpy_version.py)" >> $GITHUB_ENV
+        run: echo "BUILD_DEPENDS=$(./get_numpy_version.py ${{ matrix.python }})" >> $GITHUB_ENV
       - name: Build Wheel
         run: .github/workflows/build.sh
       - uses: actions/upload-artifact@v3

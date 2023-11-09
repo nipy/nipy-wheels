@@ -39,7 +39,7 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Set Numpy version
         run: |
-          $np_dep = python .\get_numpy_version.py
+          $np_dep = python .\get_numpy_version.py ${{ matrix.python }}
           echo "BUILD_DEPENDS=$np_dep" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
       - name: Build Wheel
         run: .github/workflows/build.ps1

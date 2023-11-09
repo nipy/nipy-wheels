@@ -3,7 +3,6 @@
 """
 
 import os
-import sys
 
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
@@ -11,6 +10,8 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter
 def get_parser():
     parser = ArgumentParser(description=__doc__,  # Usage from docstring
                             formatter_class=RawDescriptionHelpFormatter)
+    parser.add_argument("py_ver",
+                        help='Python version e.g. 3.11')
     parser.add_argument('-t', '--type', default='build',
                         help='Dependency type')
     return parser
@@ -19,9 +20,10 @@ def get_parser():
 def main():
     parser = get_parser()
     args = parser.parse_args()
-    major, minor, *_ = sys.version_info
-    assert major == 3
+    major, minor, *_ = args.py_ver.split('.')
+    assert major == "3"
     np_version = "1.22.2"
+    minor = int(minor)
     if minor >= 12:
         np_version = "1.26.0"
     elif minor >= 11:
