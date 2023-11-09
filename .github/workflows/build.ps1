@@ -4,8 +4,8 @@ echo "::group::Build wheel"
 echo "::endgroup::"
 
 echo "::group::Install wheel"
-    pip install wheelhouse/nipy*.whl
-    pip install nipy/dev-requirements.txt
+    pip install --find-links ./wheelhouse --pre nipy
+    pip install -r nipy/dev-requirements.txt
 echo "::endgroup::"
 
 echo "::group::Test wheel"
