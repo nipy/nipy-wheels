@@ -1,0 +1,50 @@
+name: Build Windows wheels
+
+on:
+  workflow_call:
+    inputs:
+      build-commit:
+        required: true
+        type: string
+      artifacts-name:
+        required: true
+        type: string
+
+env:
+  REPO_DIR: nipy
+  TEST_DEPENDS: "-r nipy/dev-requirements.txt"
+
+jobs:
+  build:
+    name: ${{ matrix.python }}
+    runs-on: "windows-latest"
+    strategy:
+      fail-fast: false
+      matrix:
+        python: [
+          "3.8",
+          "3.9",
+          "3.10",
+          "3.11",
+          "3.12",
+        ]
+    env:
+      BUILD_COMMIT: ${{ inputs.build-commit }}
+      WHEEL_SDIR: wheelhouse
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+      - name: Build Wheel
+        run: .github/workflows/build.ps1
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ inputs.artifacts-name }}
+          path: wheelhouse/*.whl
+      # Uncomment to get SSH access for testing
+      # - name: Setup tmate session
+      #   if: failure()
+      #   uses: mxschmitt/action-tmate@v3
