@@ -1,12 +1,12 @@
 # Define custom utilities
 # Test for OSX with [ -n "$IS_MACOS" ]
 
-function clean_arch_flags {
+function clean_archflags {
     # Clean up potential duplicate arch flags
-    if [[ $ARCH_FLAGS =~ "-arch arm64" ]]; then
-        export ARCH_FLAGS="-arch arm64"
-    elif [[ $ARCH_FLAGS =~ "-arch x86_64" ]]; then
-        export ARCH_FLAGS="-arch x86_64"
+    if [[ $ARCHFLAGS =~ "-arch arm64" ]]; then
+        export ARCHFLAGS="-arch arm64"
+    elif [[ $ARCHFLAGS =~ "-arch x86_64" ]]; then
+        export ARCHFLAGS="-arch x86_64"
     fi
 }
 
@@ -22,7 +22,7 @@ function pre_build {
 
 function pip_wheel_cmd {
     local abs_wheelhouse=$1
-    clean_arch_flags
+    clean_archflags
     pip wheel $(pip_opts) -w $abs_wheelhouse --no-deps .
 }
 
