@@ -10,6 +10,11 @@ function pre_build {
     brew install openblas
 }
 
+function pip_wheel_cmd {
+    local abs_wheelhouse=$1
+    pip wheel $(pip_opts) -w $abs_wheelhouse --no-build-isolation .
+}
+
 function run_tests {
     # Runs tests on installed distribution from an empty directory
     python --version

@@ -25,6 +25,8 @@ echo "::group::Install a virtualenv"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
+  np_dep=$(python ./get_numpy_version.py $MB_PYTHON_VERSION)
+  export BUILD_DEPENDS="${BUILD_BASE} ${np_dep}"
   np_dep=$(python get_numpy_version.py ${MB_PYTHON_VERSION})
   export BUILD_DEPENDS=$np_dep
   clean_code

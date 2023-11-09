@@ -1,5 +1,6 @@
 echo "::group::Build wheel"
-  pip wheel -w "${env:WHEEL_SDIR}" --no-deps ".\${env:REPO_DIR}"
+  pip install "$env:BUILD_DEPENDS"
+  pip wheel -w "${env:WHEEL_SDIR}" --no-build-isolation ".\${env:REPO_DIR}"
   ls -l "${env:GITHUB_WORKSPACE}/${env:WHEEL_SDIR}/"
 echo "::endgroup::"
 
