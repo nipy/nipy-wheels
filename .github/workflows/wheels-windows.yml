@@ -31,7 +31,7 @@ jobs:
       BUILD_COMMIT: ${{ inputs.build-commit }}
       WHEEL_SDIR: wheelhouse
       MB_PYTHON_VERSION: ${{ matrix.python }}
-      BUILD_BASE: "meson-python>=0.13 cython>=3"
+      BUILD_BASE: "meson-python>=0.13 ninja cython>=3"
     steps:
       - uses: actions/checkout@v4
         with:
