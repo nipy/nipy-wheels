@@ -54,7 +54,7 @@ jobs:
           submodules: true
       - uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python }}
       - name: Set Numpy version
         run: echo "BUILD_DEPENDS=$(./get_numpy_version.py)" >> $GITHUB_ENV
       - name: Build Wheel
