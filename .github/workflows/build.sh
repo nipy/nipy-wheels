@@ -11,6 +11,8 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   else
     export MACOSX_DEPLOYMENT_TARGET="10.10"
   fi
+  # Mac Pythons do not have toml parser by default.
+  python3 install tomli
 fi
 
 if [[ "$MB_PYTHON_VERSION" == pypy3* ]]; then
@@ -20,14 +22,13 @@ fi
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
-  $PYTHON_EXE -m pip install virtualenv
+  python3 -m pip install virtualenv
   before_install
 echo "::endgroup::"
 
 echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
-  $PIP_CMD install tomlkit
-  export BUILD_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
+  export BUILD_DEPENDS=$(python3 ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
   build_wheel
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"

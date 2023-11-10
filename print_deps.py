@@ -6,12 +6,15 @@ import os
 from pathlib import Path
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
-import tomlkit
+try:
+    import tomllib as tlib
+except ImportError:
+    import tomli as tlib
 
 
 def get_phase_requirements(repo_path, phase='build'):
     toml = (Path(repo_path) / 'pyproject.toml').read_text()
-    config = tomlkit.loads(toml)
+    config = tlib.loads(toml)
     if phase == 'build':
         requires = config.get('build-system', {}).get('requires', [])
     else:
