@@ -1,9 +1,7 @@
 echo "::group::Build wheel"
   $wheel_sdir = "wheelhouse"
   pip install tomli
-  $build_dep = python .\print_deps.py $env:MB_PYTHON_VERSION ${env:REPO_DIR}
-  pip install @($build_dep.split())
-  pip wheel -w "${wheel_sdir}" --no-build-isolation ".\${env:REPO_DIR}"
+  pip wheel -w "${wheel_sdir}" --no-deps ".\${env:REPO_DIR}"
   ls -l "${env:GITHUB_WORKSPACE}/${wheel_sdir}/"
 echo "::endgroup::"
 
