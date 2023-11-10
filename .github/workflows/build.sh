@@ -8,6 +8,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 
   if [[ "$PLAT" == "arm64" ]]; then
     export MACOSX_DEPLOYMENT_TARGET="11.0"
+    CMD_SUFFIX='arch -arm64'
   else
     export MACOSX_DEPLOYMENT_TARGET="10.10"
   fi
@@ -20,20 +21,21 @@ fi
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
-  python3 -m pip install virtualenv
   before_install
+  export PIP_CMD="$CMD_SUFFIX $PIP_CMD"
+  export PYTHON_EXE="$CMD_SUFFIX $PYTHON_EXE"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
-  pip install tomlkit
-  export BUILD_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
+  $PIP_CMD install tomlkit
+  export BUILD_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
   build_wheel
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
 echo "::endgroup::"
 
 echo "::group::Test wheel"
-  export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
+  export TEST_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
   install_run
 echo "::endgroup::"
