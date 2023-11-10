@@ -25,6 +25,7 @@ echo "::group::Install a virtualenv"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
+  export WHEEL_SDIR=wheelhouse
   pip install tomlkit
   export BUILD_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
