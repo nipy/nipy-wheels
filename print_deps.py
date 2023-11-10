@@ -2,6 +2,7 @@
 """ Echo dependencies for given environment
 """
 
+import os
 from pathlib import Path
 from argparse import ArgumentParser, RawDescriptionHelpFormatter
 
@@ -19,11 +20,13 @@ def get_build_requirements(repo_path):
 def get_numpy_requirement(py_ver):
     major, minor, *_ = py_ver.split('.')
     assert major == "3"
-    np_version = "1.22.2"
+    musl = os.environ.get('MB_ML_LIBC') == 'musllinux'
+    # musllinux wheels started at 1.25.0
+    np_version = "1.22.2" if not musl else '1.25.0'
     minor = int(minor)
     if minor >= 12:
         np_version = "1.26.0"
-    elif minor >= 11:
+    elif minor >= 11 and not musl:
         np_version = "1.23.2"
     return np_version
 
