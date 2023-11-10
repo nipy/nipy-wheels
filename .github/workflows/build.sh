@@ -11,18 +11,12 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   else
     export MACOSX_DEPLOYMENT_TARGET="10.10"
   fi
-  # Mac Pythons do not have toml parser by default.
-  python3 install tomli
-fi
-
-if [[ "$MB_PYTHON_VERSION" == pypy3* ]]; then
-  MB_PYTHON_OSX_VER="10.9"
 fi
 
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
-  python3 -m pip install virtualenv
+  python3 -m pip install virtualenv tomli
   before_install
 echo "::endgroup::"
 
