@@ -22,7 +22,7 @@ def get_numpy_requirement(py_ver):
     assert major == "3"
     musl = os.environ.get('MB_ML_LIBC') == 'musllinux'
     # musllinux wheels started at 1.25.0
-    np_version = "1.22.2" if not musl else '1.25.0'
+    np_version = "1.22.0" if not musl else '1.25.0'
     minor = int(minor)
     if minor >= 12:
         np_version = "1.26.0"
