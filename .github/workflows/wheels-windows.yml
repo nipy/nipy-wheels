@@ -29,9 +29,7 @@ jobs:
         ]
     env:
       BUILD_COMMIT: ${{ inputs.build-commit }}
-      WHEEL_SDIR: wheelhouse
       MB_PYTHON_VERSION: ${{ matrix.python }}
-      BUILD_BASE: "meson-python>=0.13 ninja cython>=3"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,10 +37,6 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python }}
-      - name: Set Numpy version
-        run: |
-          $np_dep = python .\get_numpy_version.py $env:MB_PYTHON_VERSION
-          echo "BUILD_DEPENDS=${env:BUILD_BASE} ${np_dep}" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
       - name: Build Wheel
         run: .github/workflows/build.ps1
       - uses: actions/upload-artifact@v3

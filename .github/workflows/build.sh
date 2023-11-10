@@ -4,7 +4,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # if php is installed, brew tries to reinstall these after installing openblas
   brew remove --ignore-dependencies curl php
 
-  brew install pkg-config
+  brew install pkg-config openblas
 
   if [[ "$PLAT" == "arm64" ]]; then
     export MACOSX_DEPLOYMENT_TARGET="11.0"
@@ -25,10 +25,8 @@ echo "::group::Install a virtualenv"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
-  np_dep=$(python ./get_numpy_version.py $MB_PYTHON_VERSION)
-  export BUILD_DEPENDS="${BUILD_BASE} ${np_dep}"
-  echo "Build depends: ${BUILD_DEPENDS}"
-  echo "Build base: ${BUILD_BASE}"
+  pip install tomlkit
+  export BUILD_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
   build_wheel
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
