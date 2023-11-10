@@ -12,7 +12,6 @@ on:
 
 env:
   REPO_DIR: nipy
-  TEST_DEPENDS: "-r nipy/dev-requirements.txt"
 
 jobs:
   build:

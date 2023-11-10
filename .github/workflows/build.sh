@@ -32,8 +32,7 @@ echo "::group::Build wheel"
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
 echo "::endgroup::"
 
-if [[ $MACOSX_DEPLOYMENT_TARGET != "11.0" ]]; then
-  echo "::group::Test wheel"
-    install_run
-  echo "::endgroup::"
-fi
+echo "::group::Test wheel"
+  export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
+  install_run
+echo "::endgroup::"

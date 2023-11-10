@@ -9,10 +9,14 @@ from argparse import ArgumentParser, RawDescriptionHelpFormatter
 import tomlkit
 
 
-def get_build_requirements(repo_path):
+def get_phase_requirements(repo_path, phase='build'):
     toml = (Path(repo_path) / 'pyproject.toml').read_text()
     config = tomlkit.loads(toml)
-    requires = config.get('build-system', {}).get('requires', [])
+    if phase == 'build':
+        requires = config.get('build-system', {}).get('requires', [])
+    else:
+        dep_dict =config.get('project', {}).get('optional-dependencies', {})
+        requires = dep_dict.get('default', []) + dep_dict.get(phase, [])
     base_req = [R for R in requires if not 'numpy' in R]
     return ' '.join(base_req)
 
@@ -36,15 +40,17 @@ def get_parser():
                             formatter_class=RawDescriptionHelpFormatter)
     parser.add_argument("py_ver", help='Python version e.g. 3.11')
     parser.add_argument("repo_dir", help='Path to source repo')
+    parser.add_argument('-p', '--phase', default='build',
+                        help='Phase ("build" or "test")')
     return parser
 
 
 def main():
     parser = get_parser()
     args = parser.parse_args()
+    base = get_phase_requirements(args.repo_dir, args.phase)
     np_req = get_numpy_requirement(args.py_ver)
-    build_base = get_build_requirements(args.repo_dir)
-    print(f'{build_base} numpy=={np_req}')
+    print(f'numpy=={np_req} {base}')
 
 
 if __name__ == '__main__':
