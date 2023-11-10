@@ -16,13 +16,14 @@ fi
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
-  python3 -m pip install virtualenv
+  python3 -m pip install virtualenv tomli
+  export BUILD_DEPENDS=$(python3 ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
+  export TEST_DEPENDS=$(python3 ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
   before_install
 echo "::endgroup::"
 
 echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
-  python -m pip install tomli
   export BUILD_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
   build_wheel
@@ -32,7 +33,6 @@ echo "::endgroup::"
 if [[ $PLAT != "arm64" ]]; then
   # arm will not install on Github Workflows x86 architecture.
   echo "::group::Test wheel"
-    export TEST_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
     install_run
   echo "::endgroup::"
 fi
