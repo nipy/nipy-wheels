@@ -1,6 +1,6 @@
 echo "::group::Build wheel"
   $wheel_sdir = "wheelhouse"
-  pip install tomlkit
+  pip install tomli
   $build_dep = python .\print_deps.py $env:MB_PYTHON_VERSION ${env:REPO_DIR}
   pip install @($build_dep.split())
   pip wheel -w "${wheel_sdir}" --no-build-isolation ".\${env:REPO_DIR}"
