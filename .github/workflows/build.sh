@@ -20,13 +20,14 @@ fi
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
+  $PYTHON_EXE -m pip install virtualenv
   before_install
 echo "::endgroup::"
 
 echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
-  pip install tomlkit
-  export BUILD_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
+  $PIP_CMD install tomlkit
+  export BUILD_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR})
   clean_code
   build_wheel
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
@@ -35,7 +36,7 @@ echo "::endgroup::"
 if [[ $PLAT != "arm64" ]]; then
   # arm will not install on Github Workflows x86 architecture.
   echo "::group::Test wheel"
-    export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
+    export TEST_DEPENDS=$($PYTHON_EXE ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
     install_run
   echo "::endgroup::"
 fi
