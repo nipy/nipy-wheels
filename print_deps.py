@@ -19,7 +19,7 @@ def get_phase_requirements(repo_path, phase='build'):
         requires = config.get('build-system', {}).get('requires', [])
     else:
         deps = config.get('project', {}).get('dependencies', [])
-        opt_dict =config.get('project', {}).get('optional-dependencies', {})
+        opt_dict = config.get('project', {}).get('optional-dependencies', {})
         requires = deps + opt_dict.get(phase, [])
     base_req = [R for R in requires if not 'numpy' in R]
     return ' '.join(base_req)
