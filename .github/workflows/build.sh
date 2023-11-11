@@ -1,4 +1,5 @@
-
+#!/bin/bash
+# Build on Mac or Linux.
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # curl from brew requires zstd, use system curl
   # if php is installed, brew tries to reinstall these after installing openblas
@@ -16,9 +17,8 @@ fi
 echo "::group::Install a virtualenv"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
-  python3 -m pip install virtualenv tomli
-  export TEST_DEPENDS=$(python3 ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
   before_install
+  export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
 echo "::endgroup::"
 
 echo "::group::Build wheel"
