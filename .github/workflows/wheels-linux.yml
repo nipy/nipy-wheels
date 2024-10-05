@@ -43,6 +43,9 @@ jobs:
           - python: "3.12"
             mb-ml-libc: "musllinux"
             mb-ml-ver: "_1_1"
+          - python: "3.13"
+            mb-ml-libc: "musllinux"
+            mb-ml-ver: "_1_1"
     env:
       BUILD_COMMIT: ${{ inputs.build-commit }}
       MB_PYTHON_VERSION: ${{ matrix.python }}
