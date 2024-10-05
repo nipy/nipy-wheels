@@ -42,7 +42,7 @@ jobs:
         run: .github/workflows/build.ps1
       - uses: actions/upload-artifact@v4
         with:
-          name: ${{ inputs.artifacts-name }}
+          name: ${{ inputs.artifacts-name }}-${{ matrix.runs-on }}-${{ matrix.platform }}-${{ matrix.python }}
           path: wheelhouse/*.whl
       # Uncomment to get SSH access for testing
       # - name: Setup tmate session
