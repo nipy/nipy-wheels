@@ -14,12 +14,12 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
 fi
 
 echo "::group::Install a virtualenv"
+  echo "PLAT: $PLAT; uname: $(uname -m)"
   source multibuild/common_utils.sh
   source multibuild/travis_steps.sh
   before_install
   export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
   echo "TEST_DEPENDS: $TEST_DEPENDS"
-  echo "PLAT: $PLAT; uname: $(uname -m)"
 echo "::endgroup::"
 
 echo "::group::Build wheel"

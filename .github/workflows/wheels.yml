@@ -11,19 +11,19 @@ jobs:
     uses: ./.github/workflows/wheels-macos.yml
     with:
       build-commit: "HEAD"
-      artifacts-name: "wheels"
+      artifacts-name: "macos-wheels"
 
   linux:
     uses: ./.github/workflows/wheels-linux.yml
     with:
       build-commit: "HEAD"
-      artifacts-name: "wheels"
+      artifacts-name: "manylinux-wheels"
 
   windows:
     uses: ./.github/workflows/wheels-windows.yml
     with:
       build-commit: "HEAD"
-      artifacts-name: "wheels"
+      artifacts-name: "windows-wheels"
 
   release:
     name: Create Release
