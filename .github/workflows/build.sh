@@ -2,8 +2,7 @@
 # Build on Mac or Linux.
 if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # curl from brew requires zstd, use system curl
-  # if php is installed, brew tries to reinstall these after installing openblas
-  brew remove --ignore-dependencies curl php
+  brew remove --ignore-dependencies curl
 
   brew install pkg-config openblas
 
