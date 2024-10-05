@@ -2,15 +2,8 @@
 Building and uploading nipy wheels
 ##################################
 
-We automate wheel building using this custom github
-repository that builds on the travis-ci macOS machines and
-the travis-ci Linux machines.
-
-The travis-ci interface for the builds is
-https://travis-ci.org/MacPython/nipy-wheels
-
-Appveyor interface at
-https://ci.appveyor.com/project/matthew-brett/nipy-wheels
+We automate wheel building using this custom github repository that builds on
+the Github Actions machines.
 
 The driving github repository is
 https://github.com/MacPython/nipy-wheels
