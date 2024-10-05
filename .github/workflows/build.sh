@@ -19,6 +19,7 @@ echo "::group::Install a virtualenv"
   before_install
   export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
   echo "TEST_DEPENDS: $TEST_DEPENDS"
+  echo "PLAT: $PLAT; uname: $(uname -m)"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
