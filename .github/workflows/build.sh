@@ -25,7 +25,6 @@ echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
   clean_code
   build_wheel
-  pip list | grep numpy
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
 echo "::endgroup::"
 
