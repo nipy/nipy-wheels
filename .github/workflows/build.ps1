@@ -7,8 +7,10 @@ echo "::endgroup::"
 
 echo "::group::Install wheel"
   $test_dep = python .\print_deps.py $env:MB_PYTHON_VERSION ${env:REPO_DIR} -p test
+  echo "test_dep: $test_dep"
   pip install @($test_dep.split())
   pip install --find-links ./wheelhouse --pre nipy
+  pip list | findstr "numpy"
 echo "::endgroup::"
 
 echo "::group::Test wheel"

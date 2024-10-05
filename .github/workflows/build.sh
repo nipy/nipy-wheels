@@ -19,12 +19,14 @@ echo "::group::Install a virtualenv"
   source multibuild/travis_steps.sh
   before_install
   export TEST_DEPENDS=$(python ./print_deps.py ${MB_PYTHON_VERSION} ${REPO_DIR} -p test)
+  echo "TEST_DEPENDS: $TEST_DEPENDS"
 echo "::endgroup::"
 
 echo "::group::Build wheel"
   export WHEEL_SDIR=wheelhouse
   clean_code
   build_wheel
+  pip list | grep numpy
   ls -l "${GITHUB_WORKSPACE}/${WHEEL_SDIR}/"
 echo "::endgroup::"
 
