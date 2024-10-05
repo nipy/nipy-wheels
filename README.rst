@@ -8,6 +8,14 @@ the Github Actions machines.
 The driving github repository is
 https://github.com/MacPython/nipy-wheels
 
+Things to configure
+===================
+
+Update the `nipy` submodule commit as below.
+
+Consider changing the Numpy versions used for the build, configured in
+`print_deps.py`.
+
 How it works
 ============
 
@@ -20,48 +28,23 @@ The wheel-building repository:
   ``auditwheel`` copy the required dynamic libraries into
   the wheel and relinks the extension modules against the
   copied libraries;
-* uploads the built wheels to http://anaconda.org/nipy/nipy
+* uploads the built wheels as Github Actions artifacts.
 
 The resulting wheels are therefore self-contained and do not need any external
 dynamic libraries apart from those provided as standard by macOS / Linux as
 defined by the manylinux1 standard.
 
-The ``.travis.yml`` file in this repository has a line
-containing the API key for the Anaconda.org organization
-encrypted with an RSA key that is unique to the repository
-- see http://docs.travis-ci.com/user/encryption-keys.
-This encrypted key gives the travis build permission to
-upload to the Anaconda.org directory pointed to by
-https://anaconda.org/nipy/nipy .
-
 Triggering a build
 ==================
 
-You will likely want to edit the ``.travis.yml`` and ``appveyor.yml`` files to
-specify the ``BUILD_COMMIT`` before triggering a build - see below.
+Update the `nipy` submodule to the commit you want to build, and commit that
+change to this repo.
 
 You will need write permission to the github repository to trigger new builds
-on the travis-ci interface.  Contact us on the mailing list if you need this.
+on the Actions interface.  Contact us on the mailing list if you need this.
 
-You can trigger a build by:
-
-* making a commit to the ``nipy-wheels`` repository (e.g. with ``git commit
-  --allow-empty``); or
-* clicking on the circular arrow icon towards the top right of the travis-ci
-  page, to rerun the previous build.
-
-In general, it is better to trigger a build with a commit, because this makes
-a new set of build products and logs, keeping the old ones for reference.
-Keeping the old build logs helps us keep track of previous problems and
-successful builds.
-
-Which nipy commit does the repository build?
-============================================
-
-The ``nipy-wheels`` repository will build the commit specified in the
-``BUILD_COMMIT`` at the top of the ``.travis.yml`` and ``appveyor.yml`` files.
-This can be any naming of a commit, including branch name, tag name or commit
-hash.
+You can trigger a build by making a commit to the ``nipy-wheels`` repository
+(e.g. with ``git commit --allow-empty``); or
 
 Uploading the built wheels to pypi
 ==================================
