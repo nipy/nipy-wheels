@@ -32,12 +32,14 @@ def get_numpy_requirement(py_ver):
     major, minor, *_ = py_ver.split('.')
     assert major == "3"
     minor = int(minor)
-    # SPEC0-minimum as of Dec 23, 2023
     if minor <= 8:
         if IS_MUSL:
             raise RuntimeError("MUSL doesn't have 3.8 wheels")
+        # SPEC0-minimum as of Dec 23, 2023
         return "1.22.0"
-    return "2.0.0"
+    if minor == 9:
+        return "2.0.2"
+    return "2.1.2"
 
 
 def get_parser():
