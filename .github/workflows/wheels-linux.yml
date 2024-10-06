@@ -26,6 +26,7 @@ jobs:
           "3.10",
           "3.11",
           "3.12",
+          "3.13",
         ]
         mb-ml-libc: [ "manylinux" ]
         mb-ml-ver: [ 2014, "_2_28" ]
@@ -42,6 +43,9 @@ jobs:
           - python: "3.12"
             mb-ml-libc: "musllinux"
             mb-ml-ver: "_1_1"
+          - python: "3.13"
+            mb-ml-libc: "musllinux"
+            mb-ml-ver: "_1_1"
     env:
       BUILD_COMMIT: ${{ inputs.build-commit }}
       MB_PYTHON_VERSION: ${{ matrix.python }}
@@ -54,6 +58,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+          allow-prereleases: true
       - name: Build Wheel
         run: .github/workflows/build.sh
       - uses: actions/upload-artifact@v4
