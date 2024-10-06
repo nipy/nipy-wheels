@@ -12,6 +12,9 @@ except ImportError:
     import tomli as tlib
 
 
+IS_MUSL = os.environ.get('MB_ML_LIBC') == 'musllinux'
+
+
 def get_phase_requirements(repo_path, phase='build'):
     toml = (Path(repo_path) / 'pyproject.toml').read_text()
     config = tlib.loads(toml)
@@ -28,15 +31,13 @@ def get_phase_requirements(repo_path, phase='build'):
 def get_numpy_requirement(py_ver):
     major, minor, *_ = py_ver.split('.')
     assert major == "3"
-    musl = os.environ.get('MB_ML_LIBC') == 'musllinux'
-    # musllinux wheels started at 1.25.0
-    np_version = "1.22.0" if not musl else '1.25.0'
     minor = int(minor)
-    if minor >= 12:
-        np_version = "1.26.0"
-    elif minor >= 11 and not musl:
-        np_version = "1.23.2"
-    return np_version
+    # SPEC0-minimum as of Dec 23, 2023
+    if minor <= 8:
+        if IS_MUSL:
+            raise RuntimeError("MUSL doesn't have 3.8 wheels")
+        return "1.22.0"
+    return "2.0.0"
 
 
 def get_parser():
