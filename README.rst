@@ -54,9 +54,7 @@ and then upload them manually to pypi, or by using twine_.
 
 To download, use something like::
 
-    python tools/download-wheels.py 0.5.0 --staging-url=https://anaconda.org/nipy/nipy --prefix=nipy -w wheelhouse
-
-where `0.5.0` is the release version.
+    gh run download
 
 You may want to add the `sdist` to the `wheelhouse`.  Build, copy with::
 
