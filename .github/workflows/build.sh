@@ -4,7 +4,7 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   # curl from brew requires zstd, use system curl
   brew remove --ignore-dependencies curl
 
-  brew install pkg-config openblas
+  brew install --force pkg-config openblas
 
   if [[ "$PLAT" == "arm64" ]]; then
     export MACOSX_DEPLOYMENT_TARGET="11.0"
