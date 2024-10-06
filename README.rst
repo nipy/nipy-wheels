@@ -54,14 +54,15 @@ and then upload them manually to pypi, or by using twine_.
 
 To download, use something like::
 
-    gh run download
+    gh run download --pattern "*-wheels-*" --dir _wheels
+    cp _wheels/*/*.whl wheelhouse
 
 You may want to add the `sdist` to the `wheelhouse`.  Build, copy with::
 
     (cd nipy && make source-release)
     cp nipy/dist/*.tar.gz wheelhouse
 
-Then upload everything with::
+Then upload everything with e.g.::
 
     twine upload --sign wheelhouse/nipy-0.5.0-*
 
