@@ -5,7 +5,6 @@ if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
   brew remove --ignore-dependencies curl
 
   brew install pkg-config openblas
-  brew reinstall pkg-config
 
   if [[ "$PLAT" == "arm64" ]]; then
     export MACOSX_DEPLOYMENT_TARGET="11.0"
